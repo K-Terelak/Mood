@@ -1,11 +1,6 @@
 package org.example.mood
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,10 +19,11 @@ fun StatsScreen(stats: List<EmotionStatUi>, onRestart: () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(18.dp),
+        verticalArrangement = Arrangement.spacedBy(60.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         SectionTitle(text = "Podsumowanie")
+        EmotionSpiderPlot(stats = stats)
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp),

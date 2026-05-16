@@ -156,5 +156,5 @@ fun PrimaryButton(text: String, onClick: () -> Unit, enabled: Boolean = true) {
 
 @Composable
 fun SectionTitle(text: String) {
-    Text(text = text, style = MaterialTheme.typography.titleMedium)
+    Text(text = text, style = MaterialTheme.typography.titleLarge)
 }
