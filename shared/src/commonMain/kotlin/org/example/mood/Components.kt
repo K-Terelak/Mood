@@ -119,7 +119,7 @@ fun EmotionChip(
 }
 
 @Composable
-fun EmotionProgressBar(label: String, progress: Float) {
+fun EmotionProgressBar(label: String, progress: Float, color: Color) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(6.dp),
@@ -135,7 +135,7 @@ fun EmotionProgressBar(label: String, progress: Float) {
         LinearProgressIndicator(
             progress = { progress },
             modifier = Modifier.fillMaxWidth().height(6.dp),
-            color = MaterialTheme.colorScheme.primary,
+            color = color,
             trackColor = MaterialTheme.colorScheme.surfaceVariant,
             drawStopIndicator = {}
         )

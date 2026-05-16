@@ -33,10 +33,35 @@ fun App() {
                 contentColor = MaterialTheme.colorScheme.onBackground,
             ) {
                 var screen by remember { mutableStateOf(Screen.Start) }
+                var ratings by remember { mutableStateOf<Map<Int, Set<String>>>(emptyMap()) }
+
+                val stats = remember(ratings) {
+                    val totalTracks = ratings.size.coerceAtLeast(1)
+                    Emotions.map { emotion ->
+                        val count = ratings.values.count { it.contains(emotion.id) }
+                        EmotionStatUi(
+                            label = emotion.label,
+                            value = count.toFloat() / totalTracks.toFloat(),
+                            color = emotion.color,
+                        )
+                    }
+                }
+
                 when (screen) {
                     Screen.Start -> StartScreen(onStart = { screen = Screen.Rating })
-                    Screen.Rating -> AudioRatingScreen(onNext = { screen = Screen.Stats })
-                    Screen.Stats -> StatsScreen(onRestart = { screen = Screen.Start })
+                    Screen.Rating -> AudioRatingScreen(
+                        onComplete = {
+                            ratings = it
+                            screen = Screen.Stats
+                        },
+                    )
+                    Screen.Stats -> StatsScreen(
+                        stats = stats,
+                        onRestart = {
+                            ratings = emptyMap()
+                            screen = Screen.Start
+                        },
+                    )
                 }
             }
         }

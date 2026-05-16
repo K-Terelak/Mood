@@ -42,7 +42,7 @@ private fun formatTime(seconds: Double): String {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AudioRatingScreen(onNext: () -> Unit) {
+fun AudioRatingScreen(onComplete: (Map<Int, Set<String>>) -> Unit) {
     val tracks = remember {
         listOf(
             TrackUi("Track 01", "audio/audio_1.mp3"),
@@ -57,17 +57,6 @@ fun AudioRatingScreen(onNext: () -> Unit) {
             TrackUi("Track 10", "audio/audio_1.mp3"),
         )
     }
-    val emotions = listOf(
-        EmotionUi("Radosc", Res.drawable.ic_1, androidx.compose.ui.graphics.Color(0xFFF59E0B)),
-        EmotionUi("Spokoj", Res.drawable.ic_2, androidx.compose.ui.graphics.Color(0xFF22D3EE)),
-        EmotionUi("Ciekawosc", Res.drawable.ic_3, androidx.compose.ui.graphics.Color(0xFF60A5FA)),
-        EmotionUi("Smutek", Res.drawable.ic_4, androidx.compose.ui.graphics.Color(0xFF818CF8)),
-        EmotionUi("Strach", Res.drawable.ic_5, androidx.compose.ui.graphics.Color(0xFFA78BFA)),
-        EmotionUi("Zlosc", Res.drawable.ic_6, androidx.compose.ui.graphics.Color(0xFFF43F5E)),
-        EmotionUi("Zaskoczenie", Res.drawable.ic_7, androidx.compose.ui.graphics.Color(0xFFFB7185)),
-        EmotionUi("Nostalgia", Res.drawable.ic_8, androidx.compose.ui.graphics.Color(0xFF34D399)),
-        EmotionUi("Odraza", Res.drawable.ic_9, androidx.compose.ui.graphics.Color(0xFF10B981)),
-    )
 
     val controller = remember { createAudioController() }
     var currentIndex by remember { mutableStateOf(0) }
@@ -138,8 +127,8 @@ fun AudioRatingScreen(onNext: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(14.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
             ) {
-                items(emotions) { emotion ->
-                    val isSelected = selectedForTrack.contains(emotion.label)
+                items(Emotions) { emotion ->
+                    val isSelected = selectedForTrack.contains(emotion.id)
                     EmotionChip(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -151,9 +140,9 @@ fun AudioRatingScreen(onNext: () -> Unit) {
                         onClick = {
                             val updated = selectedForTrack.toMutableSet()
                             if (isSelected) {
-                                updated.remove(emotion.label)
+                                updated.remove(emotion.id)
                             } else {
-                                updated.add(emotion.label)
+                                updated.add(emotion.id)
                             }
                             selections[currentIndex] = updated
                         },
@@ -170,7 +159,7 @@ fun AudioRatingScreen(onNext: () -> Unit) {
                 if (currentIndex < tracks.lastIndex) {
                     currentIndex += 1
                 } else {
-                    onNext()
+                    onComplete(selections.toMap())
                 }
             },
         )
