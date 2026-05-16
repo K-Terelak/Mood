@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 private enum class Screen {
     Start,
     Rating,
+    Stats,
 }
 
 @Composable
@@ -34,7 +35,8 @@ fun App() {
                 var screen by remember { mutableStateOf(Screen.Start) }
                 when (screen) {
                     Screen.Start -> StartScreen(onStart = { screen = Screen.Rating })
-                    Screen.Rating -> AudioRatingScreen(onNext = { screen = Screen.Start })
+                    Screen.Rating -> AudioRatingScreen(onNext = { screen = Screen.Stats })
+                    Screen.Stats -> StatsScreen(onRestart = { screen = Screen.Start })
                 }
             }
         }

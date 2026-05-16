@@ -119,6 +119,30 @@ fun EmotionChip(
 }
 
 @Composable
+fun EmotionProgressBar(label: String, progress: Float) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(text = label, style = MaterialTheme.typography.labelLarge)
+            Text(text = "${(progress * 100).toInt()}%", style = MaterialTheme.typography.labelLarge)
+        }
+        LinearProgressIndicator(
+            progress = { progress },
+            modifier = Modifier.fillMaxWidth().height(6.dp),
+            color = MaterialTheme.colorScheme.primary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            drawStopIndicator = {}
+        )
+    }
+}
+
+@Composable
 fun PrimaryButton(text: String, onClick: () -> Unit, enabled: Boolean = true) {
     Button(
         modifier = Modifier.fillMaxWidth().height(52.dp),
