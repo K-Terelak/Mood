@@ -30,12 +30,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build production bundle
-        run: ./gradlew jsBrowserDistribution --no-daemon
+        run: ./gradlew :webApp:wasmJsBrowserDistribution --no-daemon
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/dist/js/productionExecutable
+          path: webApp/build/dist/wasmJs/productionExecutable
 
   deploy:
     needs: build
