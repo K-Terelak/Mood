@@ -46,6 +46,7 @@ fun AudioPlayerCard(
     playIcon: DrawableResource,
     stopIcon: DrawableResource,
     isPlaying: Boolean = false,
+    onPlayPause: () -> Unit,
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = MoodTokens.glassSurface),
@@ -59,6 +60,7 @@ fun AudioPlayerCard(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Surface(
+                onClick = onPlayPause,
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
                 shape = RoundedCornerShape(20.dp),
             ) {
@@ -117,11 +119,12 @@ fun EmotionChip(
 }
 
 @Composable
-fun PrimaryButton(text: String, onClick: () -> Unit) {
+fun PrimaryButton(text: String, onClick: () -> Unit, enabled: Boolean = true) {
     Button(
         modifier = Modifier.fillMaxWidth().height(52.dp),
         onClick = onClick,
         shape = RoundedCornerShape(16.dp),
+        enabled = enabled,
     ) {
         Text(text = text, style = MaterialTheme.typography.titleMedium)
     }
