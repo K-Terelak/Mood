@@ -46,15 +46,15 @@ fun AudioRatingScreen(onComplete: (Map<Int, Set<String>>) -> Unit) {
     val tracks = remember {
         listOf(
             TrackUi("Track 01", "audio/audio_1.mp3"),
-            TrackUi("Track 02", "audio/audio_1.mp3"),
-            TrackUi("Track 03", "audio/audio_1.mp3"),
-            TrackUi("Track 04", "audio/audio_1.mp3"),
-            TrackUi("Track 05", "audio/audio_1.mp3"),
-            TrackUi("Track 06", "audio/audio_1.mp3"),
-            TrackUi("Track 07", "audio/audio_1.mp3"),
-            TrackUi("Track 08", "audio/audio_1.mp3"),
-            TrackUi("Track 09", "audio/audio_1.mp3"),
-            TrackUi("Track 10", "audio/audio_1.mp3"),
+            TrackUi("Track 02", "audio/audio_2.mp3"),
+            TrackUi("Track 03", "audio/audio_3.mp3"),
+            TrackUi("Track 04", "audio/audio_4.mp3"),
+            TrackUi("Track 05", "audio/audio_5.mp3"),
+            TrackUi("Track 06", "audio/audio_6.mp3"),
+            TrackUi("Track 07", "audio/audio_7.mp3"),
+            TrackUi("Track 08", "audio/audio_8.mp3"),
+            TrackUi("Track 09", "audio/audio_9.mp3"),
+            TrackUi("Track 10", "audio/audio_10.mp3"),
         )
     }
 
